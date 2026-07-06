@@ -1,0 +1,32 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.heading {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.subheading {
+  margin: 0 0 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.continents {
+  display: flex;
+  flex-direction: column;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}

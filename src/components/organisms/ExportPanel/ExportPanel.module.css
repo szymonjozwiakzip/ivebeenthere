@@ -1,0 +1,82 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.heading {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.description {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.controls > :nth-child(3),
+.controls > :nth-child(4) {
+  grid-column: 1 / -1;
+}
+
+.exportPreview {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.exportHeader {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.exportTitle {
+  margin: 0;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.75rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+  text-shadow: 2px 2px 0 #93c5fd;
+}
+
+.exportSubtitle {
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.exportMeta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+}
+
+.exportActions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+  .controls {
+    grid-template-columns: 1fr;
+  }
+}
