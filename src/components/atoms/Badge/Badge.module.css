@@ -1,0 +1,24 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.625rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.default {
+  background: var(--surface-muted);
+  color: var(--text-secondary);
+}
+
+.success {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.accent {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
