@@ -1,0 +1,38 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.25rem 0 1.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.titles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.title {
+  margin: 0;
+  font-family: 'Press Start 2P', cursive;
+  font-size: clamp(0.75rem, 2.5vw, 1.125rem);
+  line-height: 1.6;
+  color: var(--text-primary);
+  text-shadow:
+    2px 2px 0 #93c5fd,
+    -1px -1px 0 rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.02em;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}

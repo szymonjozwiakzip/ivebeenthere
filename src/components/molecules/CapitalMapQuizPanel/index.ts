@@ -1,0 +1,1 @@
+export { CapitalMapQuizPanel } from './CapitalMapQuizPanel';

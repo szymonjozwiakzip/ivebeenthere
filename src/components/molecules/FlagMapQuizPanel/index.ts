@@ -1,0 +1,1 @@
+export { FlagMapQuizPanel } from './FlagMapQuizPanel';

@@ -1,0 +1,1 @@
+export { TestQuizPanel } from './TestQuizPanel';

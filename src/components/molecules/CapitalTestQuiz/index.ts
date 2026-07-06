@@ -1,0 +1,1 @@
+export { CapitalTestQuiz } from './CapitalTestQuiz';

@@ -1,0 +1,70 @@
+.mapContainer {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(180deg, #f0f5fc 0%, #e8eef8 100%);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.scopeLabel {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 2;
+  padding: 0.375rem 0.75rem;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  box-shadow: var(--shadow-sm);
+}
+
+.map {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0.5rem 1rem 0.75rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.dotPending,
+.dotCorrect,
+.dotIncorrect {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dotPending {
+  background: #dde4ee;
+  border: 1px solid #b8c5d6;
+}
+
+.dotCorrect {
+  background: #16a34a;
+}
+
+.dotIncorrect {
+  background: #dc2626;
+}
