@@ -18,26 +18,6 @@ npm install
 npm run dev
 ```
 
-## GitHub Pages
-
-Aplikacja jest publikowana pod:
-
-**https://szymonjozwiakzip.github.io/ivebeenthere/**
-
-### Lokalny build jak na Pages
-
-```bash
-npm run build:pages
-npm run preview:pages
-```
-
-### Deploy
-
-1. W repozytorium: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-2. Push na `main` uruchamia workflow `.github/workflows/deploy-pages.yml`.
-
-Lokalny dev (`npm run dev`) używa `base: /`. Build Pages ustawia `VITE_BASE_PATH=/ivebeenthere/`.
-
 ## Stack
 
 - React 18 + TypeScript
