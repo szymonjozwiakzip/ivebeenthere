@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react';
-import { Button } from '@/components/atoms/Button';
-import { Input } from '@/components/atoms/Input';
-import { Badge } from '@/components/atoms/Badge';
-import { FlagImage } from '@/components/atoms/FlagImage';
-import { TestQuizProgress } from '@/components/molecules/TestQuizProgress';
-import { useTestStore } from '@/store/testStore';
-import { checkCountryAnswer } from '@/utils/testAnswer';
-import type { TestAnswer } from '@/types/test';
-import styles from './FlagTestQuiz.module.css';
+import { useState, useEffect } from "react";
+import { Button } from "@/components/atoms/Button";
+import { Input } from "@/components/atoms/Input";
+import { Badge } from "@/components/atoms/Badge";
+import { FlagImage } from "@/components/atoms/FlagImage";
+import { TestQuizProgress } from "@/components/molecules/TestQuizProgress";
+import { useTestStore } from "@/store/testStore";
+import { checkCountryAnswer } from "@/utils/testAnswer";
+import type { TestAnswer } from "@/types/test";
+import styles from "./FlagTestQuiz.module.css";
 
 interface FlagTestQuizProps {
   countryNames: Map<string, string>;
@@ -20,7 +20,7 @@ export function FlagTestQuiz({ countryNames, elapsedMs }: FlagTestQuizProps) {
   const answers = useTestStore((s) => s.answers);
   const questionQueue = useTestStore((s) => s.questionQueue);
 
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const [showResult, setShowResult] = useState(false);
   const [lastResult, setLastResult] = useState<TestAnswer | null>(null);
 
@@ -32,7 +32,7 @@ export function FlagTestQuiz({ countryNames, elapsedMs }: FlagTestQuizProps) {
     : answers.length;
 
   useEffect(() => {
-    setInput('');
+    setInput("");
     setShowResult(false);
     setLastResult(null);
   }, [currentQuestionId]);
@@ -56,7 +56,7 @@ export function FlagTestQuiz({ countryNames, elapsedMs }: FlagTestQuizProps) {
     submitAnswer(lastResult);
     setShowResult(false);
     setLastResult(null);
-    setInput('');
+    setInput("");
   };
 
   const correctCount = answers.filter((a) => a.isCorrect).length;
@@ -90,17 +90,19 @@ export function FlagTestQuiz({ countryNames, elapsedMs }: FlagTestQuizProps) {
 
       {showResult && lastResult ? (
         <div className={styles.result}>
-          <Badge variant={lastResult.isCorrect ? 'success' : 'default'}>
-            {lastResult.isCorrect ? 'Poprawnie' : 'Błędnie'}
+          <Badge variant={lastResult.isCorrect ? "success" : "default"}>
+            {lastResult.isCorrect ? "Poprawnie" : "Błędnie"}
           </Badge>
           <p className={styles.answerName}>{countryName}</p>
           {!lastResult.isCorrect && (
             <p className={styles.wrongAnswer}>
-              Twoja odpowiedź: <strong>{lastResult.userAnswer || '—'}</strong>
+              Twoja odpowiedź: <strong>{lastResult.userAnswer || "-"}</strong>
             </p>
           )}
           <Button variant="primary" fullWidth onClick={handleNext}>
-            {answers.length + 1 >= questionQueue.length ? 'Zobacz wyniki' : 'Następna flaga'}
+            {answers.length + 1 >= questionQueue.length
+              ? "Zobacz wyniki"
+              : "Następna flaga"}
           </Button>
         </div>
       ) : (
@@ -119,7 +121,12 @@ export function FlagTestQuiz({ countryNames, elapsedMs }: FlagTestQuizProps) {
             autoComplete="off"
             autoFocus
           />
-          <Button type="submit" variant="primary" fullWidth disabled={!input.trim()}>
+          <Button
+            type="submit"
+            variant="primary"
+            fullWidth
+            disabled={!input.trim()}
+          >
             Zatwierdź odpowiedź
           </Button>
         </form>

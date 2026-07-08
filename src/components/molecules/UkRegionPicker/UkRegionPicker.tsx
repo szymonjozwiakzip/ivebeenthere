@@ -1,8 +1,8 @@
-import type { UkRegion } from '@/types';
-import { UK_REGION_LABELS } from '@/data/countries';
-import styles from './UkRegionPicker.module.css';
+import type { UkRegion } from "@/types";
+import { UK_REGION_LABELS } from "@/data/countries";
+import styles from "./UkRegionPicker.module.css";
 
-const ALL_REGIONS: UkRegion[] = ['ENG', 'SCT', 'WLS', 'NIR'];
+const ALL_REGIONS: UkRegion[] = ["ENG", "SCT", "WLS", "NIR"];
 
 interface UkRegionPickerProps {
   value: UkRegion[] | undefined;
@@ -10,7 +10,11 @@ interface UkRegionPickerProps {
   disabled?: boolean;
 }
 
-export function UkRegionPicker({ value, onChange, disabled }: UkRegionPickerProps) {
+export function UkRegionPicker({
+  value,
+  onChange,
+  disabled,
+}: UkRegionPickerProps) {
   const isWholeUk = !value || value.length === 0;
 
   const toggleRegion = (region: UkRegion) => {
@@ -34,13 +38,13 @@ export function UkRegionPicker({ value, onChange, disabled }: UkRegionPickerProp
     <fieldset className={styles.fieldset} disabled={disabled}>
       <legend className={styles.legend}>Które części UK?</legend>
       <p className={styles.hint}>
-        Opcjonalnie — zostaw puste, jeśli byłeś w całej Wielkiej Brytanii lub nie chcesz
-        rozróżniać.
+        Opcjonalnie - zostaw puste, jeśli byłeś w całej Wielkiej Brytanii lub
+        nie chcesz rozróżniać.
       </p>
       <div className={styles.options}>
         <button
           type="button"
-          className={`${styles.option} ${isWholeUk ? styles.optionActive : ''}`}
+          className={`${styles.option} ${isWholeUk ? styles.optionActive : ""}`}
           onClick={selectWholeUk}
         >
           Cała Wielka Brytania
@@ -51,7 +55,9 @@ export function UkRegionPicker({ value, onChange, disabled }: UkRegionPickerProp
             <button
               key={region}
               type="button"
-              className={`${styles.option} ${active ? styles.optionActive : ''}`}
+              className={`${styles.option} ${
+                active ? styles.optionActive : ""
+              }`}
               onClick={() => toggleRegion(region)}
             >
               {UK_REGION_LABELS[region]}

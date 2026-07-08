@@ -1,70 +1,74 @@
-import { useState, useEffect, useMemo } from 'react';
-import { Button } from '@/components/atoms/Button';
-import { Input } from '@/components/atoms/Input';
-import { CONTINENT_LABELS } from '@/data/constants';
-import { getSelectableContinents } from '@/utils/testScope';
-import { buildTestCountryPool } from '@/utils/testScope';
-import { getListCountryIds } from '@/utils/countryList';
-import { getCapitalCountryIds } from '@/utils/capitals';
-import { usesQuestionQueue } from '@/utils/testModes';
-import type { Continent } from '@/types';
-import type { TestConfig, TestMode, TestTimerMode } from '@/types/test';
-import styles from './TestSetup.module.css';
+import { useState, useEffect, useMemo } from "react";
+import { Button } from "@/components/atoms/Button";
+import { Input } from "@/components/atoms/Input";
+import { CONTINENT_LABELS } from "@/data/constants";
+import { getSelectableContinents } from "@/utils/testScope";
+import { buildTestCountryPool } from "@/utils/testScope";
+import { getListCountryIds } from "@/utils/countryList";
+import { getCapitalCountryIds } from "@/utils/capitals";
+import { usesQuestionQueue } from "@/utils/testModes";
+import type { Continent } from "@/types";
+import type { TestConfig, TestMode, TestTimerMode } from "@/types/test";
+import styles from "./TestSetup.module.css";
 
 interface TestSetupProps {
   onStart: (config: TestConfig) => void;
 }
 
 const DURATION_OPTIONS = [
-  { label: 'Bez limitu (w górę)', mode: 'count-up' as TestTimerMode, seconds: 0 },
-  { label: '1 minuta', mode: 'countdown' as TestTimerMode, seconds: 60 },
-  { label: '3 minuty', mode: 'countdown' as TestTimerMode, seconds: 180 },
-  { label: '5 minut', mode: 'countdown' as TestTimerMode, seconds: 300 },
-  { label: '10 minut', mode: 'countdown' as TestTimerMode, seconds: 600 },
+  {
+    label: "Bez limitu (w górę)",
+    mode: "count-up" as TestTimerMode,
+    seconds: 0,
+  },
+  { label: "1 minuta", mode: "countdown" as TestTimerMode, seconds: 60 },
+  { label: "3 minuty", mode: "countdown" as TestTimerMode, seconds: 180 },
+  { label: "5 minut", mode: "countdown" as TestTimerMode, seconds: 300 },
+  { label: "10 minut", mode: "countdown" as TestTimerMode, seconds: 600 },
 ];
 
 const MODES: { id: TestMode; label: string }[] = [
-  { id: 'map', label: 'Mapa' },
-  { id: 'flags', label: 'Flagi' },
-  { id: 'flag-map', label: 'Flagi + mapa' },
-  { id: 'capitals', label: 'Stolice' },
-  { id: 'capital-map', label: 'Stolice + mapa' },
+  { id: "map", label: "Mapa" },
+  { id: "flags", label: "Flagi" },
+  { id: "flag-map", label: "Flagi + mapa" },
+  { id: "capitals", label: "Stolice" },
+  { id: "capital-map", label: "Stolice + mapa" },
 ];
 
 function getPoolIds(mode: TestMode): string[] {
-  return mode === 'capitals' || mode === 'capital-map'
+  return mode === "capitals" || mode === "capital-map"
     ? getCapitalCountryIds()
     : getListCountryIds();
 }
 
 function getModeDescription(mode: TestMode): string {
   switch (mode) {
-    case 'map':
-      return 'Wybierz zakres i czas, potem podpisuj kraje na mapie.';
-    case 'flags':
-      return 'Wybierz zakres, czas i liczbę flag — rozpoznawaj kraje po chorągiewkach.';
-    case 'flag-map':
-      return 'Zobacz flagę i kliknij właściwy kraj na mapie.';
-    case 'capitals':
-      return 'Wybierz zakres, czas i liczbę pytań — podawaj stolice wyświetlanych krajów.';
-    case 'capital-map':
-      return 'Zobacz stolicę i kliknij właściwy kraj na mapie.';
+    case "map":
+      return "Wybierz zakres i czas, potem podpisuj kraje na mapie.";
+    case "flags":
+      return "Wybierz zakres, czas i liczbę flag - rozpoznawaj kraje po chorągiewkach.";
+    case "flag-map":
+      return "Zobacz flagę i kliknij właściwy kraj na mapie.";
+    case "capitals":
+      return "Wybierz zakres, czas i liczbę pytań - podawaj stolice wyświetlanych krajów.";
+    case "capital-map":
+      return "Zobacz stolicę i kliknij właściwy kraj na mapie.";
     default:
-      return '';
+      return "";
   }
 }
 
 export function TestSetup({ onStart }: TestSetupProps) {
-  const [mode, setMode] = useState<TestMode>('map');
+  const [mode, setMode] = useState<TestMode>("map");
   const [world, setWorld] = useState(true);
   const [continents, setContinents] = useState<Continent[]>([]);
   const [timerIndex, setTimerIndex] = useState(0);
   const [questionCount, setQuestionCount] = useState(20);
 
-  const scope = world ? 'world' : continents;
+  const scope = world ? "world" : continents;
   const poolSize = useMemo(
     () => buildTestCountryPool(scope, getPoolIds(mode)).length,
-    [world, continents, mode],
+    [world, continents, mode]
   );
 
   useEffect(() => {
@@ -74,7 +78,7 @@ export function TestSetup({ onStart }: TestSetupProps) {
   const toggleContinent = (c: Continent) => {
     setWorld(false);
     setContinents((prev) =>
-      prev.includes(c) ? prev.filter((x) => x !== c) : [...prev, c],
+      prev.includes(c) ? prev.filter((x) => x !== c) : [...prev, c]
     );
   };
 
@@ -87,7 +91,7 @@ export function TestSetup({ onStart }: TestSetupProps) {
 
   const handleStart = () => {
     const timer = DURATION_OPTIONS[timerIndex];
-    if (scope !== 'world' && scope.length === 0) return;
+    if (scope !== "world" && scope.length === 0) return;
 
     onStart({
       mode,
@@ -113,7 +117,9 @@ export function TestSetup({ onStart }: TestSetupProps) {
             <button
               key={m.id}
               type="button"
-              className={`${styles.modeTab} ${mode === m.id ? styles.modeTabActive : ''}`}
+              className={`${styles.modeTab} ${
+                mode === m.id ? styles.modeTabActive : ""
+              }`}
               onClick={() => setMode(m.id)}
             >
               {m.label}
@@ -175,7 +181,11 @@ export function TestSetup({ onStart }: TestSetupProps) {
             <input
               type="checkbox"
               checked={useFullPool}
-              onChange={() => setQuestionCount(useFullPool ? Math.min(20, poolSize) : poolSize)}
+              onChange={() =>
+                setQuestionCount(
+                  useFullPool ? Math.min(20, poolSize) : poolSize
+                )
+              }
             />
             Wszystkie z zakresu ({poolSize})
           </label>
@@ -199,7 +209,12 @@ export function TestSetup({ onStart }: TestSetupProps) {
         </div>
       </fieldset>
 
-      <Button variant="primary" fullWidth onClick={handleStart} disabled={!canStart}>
+      <Button
+        variant="primary"
+        fullWidth
+        onClick={handleStart}
+        disabled={!canStart}
+      >
         Rozpocznij test
       </Button>
     </div>

@@ -30,6 +30,6 @@ npm run dev
 
 Komponenty podzielone według atomic design:
 
-- `atoms/` — Button, Input, Select, Badge, RotatingGlobe, ProgressBar
-- `molecules/` — ContinentStatCard, PhotoUpload, YearInput, WorldSummary
-- `organisms/` — AppHeader, WorldMap, CountryPanel, StatsPanel, ExportPanel
+- `atoms/` - Button, Input, Select, Badge, RotatingGlobe, ProgressBar
+- `molecules/` - ContinentStatCard, PhotoUpload, YearInput, WorldSummary
+- `organisms/` - AppHeader, WorldMap, CountryPanel, StatsPanel, ExportPanel

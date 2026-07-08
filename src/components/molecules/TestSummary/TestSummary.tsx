@@ -1,9 +1,9 @@
-import { Button } from '@/components/atoms/Button';
-import { Badge } from '@/components/atoms/Badge';
-import { useTestStore } from '@/store/testStore';
-import { getScopeLabel } from '@/utils/testScope';
-import { getTestModeLabel, usesQuestionQueue } from '@/utils/testModes';
-import styles from './TestSummary.module.css';
+import { Button } from "@/components/atoms/Button";
+import { Badge } from "@/components/atoms/Badge";
+import { useTestStore } from "@/store/testStore";
+import { getScopeLabel } from "@/utils/testScope";
+import { getTestModeLabel, usesQuestionQueue } from "@/utils/testModes";
+import styles from "./TestSummary.module.css";
 
 interface TestSummaryProps {
   onNewTest: () => void;
@@ -13,7 +13,7 @@ function formatDuration(ms: number): string {
   const totalSec = Math.floor(ms / 1000);
   const m = Math.floor(totalSec / 60);
   const s = totalSec % 60;
-  return `${m}:${s.toString().padStart(2, '0')}`;
+  return `${m}:${s.toString().padStart(2, "0")}`;
 }
 
 export function TestSummary({ onNewTest }: TestSummaryProps) {
@@ -27,15 +27,16 @@ export function TestSummary({ onNewTest }: TestSummaryProps) {
   if (!config) return null;
 
   const totalQuestions = usesQuestionQueue(config.mode)
-      ? questionQueue.length
-      : countryPool.length;
+    ? questionQueue.length
+    : countryPool.length;
 
   const correct = answers.filter((a) => a.isCorrect);
   const incorrect = answers.filter((a) => !a.isCorrect);
-  const durationMs =
-    startedAt && endedAt ? endedAt - startedAt : 0;
+  const durationMs = startedAt && endedAt ? endedAt - startedAt : 0;
   const accuracy =
-    answers.length > 0 ? Math.round((correct.length / answers.length) * 100) : 0;
+    answers.length > 0
+      ? Math.round((correct.length / answers.length) * 100)
+      : 0;
   const coverage =
     totalQuestions > 0
       ? Math.round((answers.length / totalQuestions) * 100)
@@ -75,7 +76,9 @@ export function TestSummary({ onNewTest }: TestSummaryProps) {
         </div>
         <div>
           <dt>Odpowiedzi</dt>
-          <dd>{answers.length} z {totalQuestions}</dd>
+          <dd>
+            {answers.length} z {totalQuestions}
+          </dd>
         </div>
         <div>
           <dt>Błędy</dt>
@@ -90,7 +93,7 @@ export function TestSummary({ onNewTest }: TestSummaryProps) {
             {incorrect.map((a) => (
               <li key={a.countryId}>
                 <strong>{a.correctName}</strong>
-                <span>— napisałeś: „{a.userAnswer || '—'}"</span>
+                <span>- napisałeś: „{a.userAnswer || "-"}"</span>
               </li>
             ))}
           </ul>

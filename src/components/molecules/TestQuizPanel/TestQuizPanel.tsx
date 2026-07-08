@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
-import { Button } from '@/components/atoms/Button';
-import { Input } from '@/components/atoms/Input';
-import { Badge } from '@/components/atoms/Badge';
-import { useTestStore } from '@/store/testStore';
-import { checkCountryAnswer } from '@/utils/testAnswer';
-import type { TestAnswer } from '@/types/test';
-import styles from './TestQuizPanel.module.css';
+import { useState, useEffect } from "react";
+import { Button } from "@/components/atoms/Button";
+import { Input } from "@/components/atoms/Input";
+import { Badge } from "@/components/atoms/Badge";
+import { useTestStore } from "@/store/testStore";
+import { checkCountryAnswer } from "@/utils/testAnswer";
+import type { TestAnswer } from "@/types/test";
+import styles from "./TestQuizPanel.module.css";
 
 interface TestQuizPanelProps {
   countryNames: Map<string, string>;
@@ -21,19 +21,26 @@ export function TestQuizPanel({ countryNames, elapsedMs }: TestQuizPanelProps) {
   const answers = useTestStore((s) => s.answers);
   const countryPool = useTestStore((s) => s.countryPool);
 
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
 
-  const answered = selectedCountryId ? getAnswerForCountry(selectedCountryId) : undefined;
+  const answered = selectedCountryId
+    ? getAnswerForCountry(selectedCountryId)
+    : undefined;
   const countryName = selectedCountryId
     ? countryNames.get(selectedCountryId) ?? selectedCountryId
     : null;
 
   useEffect(() => {
-    setInput('');
+    setInput("");
   }, [selectedCountryId]);
 
   const handleSubmit = () => {
-    if (!selectedCountryId || !countryName || isCountryAnswered(selectedCountryId)) return;
+    if (
+      !selectedCountryId ||
+      !countryName ||
+      isCountryAnswered(selectedCountryId)
+    )
+      return;
     const correct = checkCountryAnswer(input, selectedCountryId, countryNames);
     const answer: TestAnswer = {
       countryId: selectedCountryId,
@@ -43,7 +50,7 @@ export function TestQuizPanel({ countryNames, elapsedMs }: TestQuizPanelProps) {
       answeredAtMs: elapsedMs,
     };
     submitAnswer(answer);
-    setInput('');
+    setInput("");
   };
 
   const correctCount = answers.filter((a) => a.isCorrect).length;
@@ -54,7 +61,8 @@ export function TestQuizPanel({ countryNames, elapsedMs }: TestQuizPanelProps) {
         <div className={styles.empty}>
           <h3 className={styles.emptyTitle}>Kliknij kraj</h3>
           <p className={styles.emptyText}>
-            Zaznacz kraj na mapie i wpisz jego nazwę. Postęp zapisuje się automatycznie.
+            Zaznacz kraj na mapie i wpisz jego nazwę. Postęp zapisuje się
+            automatycznie.
           </p>
           <div className={styles.progress}>
             <div className={styles.progressItem}>
@@ -79,16 +87,20 @@ export function TestQuizPanel({ countryNames, elapsedMs }: TestQuizPanelProps) {
     return (
       <div className={styles.panel}>
         <div className={styles.result}>
-          <Badge variant={answered.isCorrect ? 'success' : 'default'}>
-            {answered.isCorrect ? 'Poprawnie' : 'Błędnie'}
+          <Badge variant={answered.isCorrect ? "success" : "default"}>
+            {answered.isCorrect ? "Poprawnie" : "Błędnie"}
           </Badge>
           <h3 className={styles.countryName}>{countryName}</h3>
           {!answered.isCorrect && (
             <p className={styles.wrongAnswer}>
-              Twoja odpowiedź: <strong>{answered.userAnswer || '—'}</strong>
+              Twoja odpowiedź: <strong>{answered.userAnswer || "-"}</strong>
             </p>
           )}
-          <Button variant="secondary" fullWidth onClick={() => selectCountry(null)}>
+          <Button
+            variant="secondary"
+            fullWidth
+            onClick={() => selectCountry(null)}
+          >
             Wybierz inny kraj
           </Button>
         </div>
@@ -125,7 +137,12 @@ export function TestQuizPanel({ countryNames, elapsedMs }: TestQuizPanelProps) {
           autoComplete="off"
           autoFocus
         />
-        <Button type="submit" variant="primary" fullWidth disabled={!input.trim()}>
+        <Button
+          type="submit"
+          variant="primary"
+          fullWidth
+          disabled={!input.trim()}
+        >
           Zatwierdź odpowiedź
         </Button>
       </form>
