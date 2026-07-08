@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "build:pages": "tsc -b && VITE_BASE_PATH=/ivebeenthere/ vite build",
+    "build:pages": "tsc -b && VITE_BASE_PATH=./ vite build",
     "preview": "vite preview",
-    "preview:pages": "VITE_BASE_PATH=/ivebeenthere/ vite preview"
+    "preview:pages": "VITE_BASE_PATH=./ vite preview"
   },
   "dependencies": {
     "html2canvas": "^1.4.1",
